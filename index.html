@@ -36,7 +36,8 @@
       {name:'Wild Swing',img:'assets/wild-swing.png',level:5,age:'14+',price:'$10',copy:'The biggest arc and the most sky in this concept lineup.'}
     ];
     document.getElementById('rides').innerHTML=rides.map((r,i)=>`<article class="ride"><img src="${r.img}" alt="Illustration of ${r.name}"><div class="ride-body"><h3>${r.name}</h3><div class="meta"><span class="dots">${'●'.repeat(r.level)}${'○'.repeat(5-r.level)}</span><br>Intensity ${r.level}/5 · Suggested ${r.age}</div><div class="ticket"><span>Sample ticket</span><strong>${r.price}</strong></div><button class="try" onclick="openSim(${i})">Try simulation</button></div></article>`).join('');
-    function openEvent(){choose.style.display='none';event.classList.add('show');scrollTo(0,0)} function closeEvent(){event.classList.remove('show');choose.style.display='block';scrollTo(0,0)}
+    const choosePage=document.getElementById('choose'); const eventPage=document.getElementById('event');
+    function openEvent(){choosePage.style.display='none';eventPage.classList.add('show');scrollTo(0,0)} function closeEvent(){eventPage.classList.remove('show');choosePage.style.display='block';scrollTo(0,0)}
     function openSim(i){const r=rides[i];simTitle.textContent=r.name;simCopy.textContent=r.copy;meter.innerHTML=Array.from({length:5},(_,x)=>`<span class="bar ${x<r.level?'on':''}"></span>`).join('');status.textContent=`Intensity ${r.level} of 5 · ${r.age} suggested`;modal.classList.add('open')} function closeSim(){modal.classList.remove('open')}
     modal.addEventListener('click',e=>{if(e.target===modal)closeSim()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSim()});
   </script>
